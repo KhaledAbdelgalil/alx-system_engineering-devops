@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 #! /usr/bin/bash
+=======
+#!/bin/bash
+>>>>>>> f154d3f... Writting a script that prints the absolute path name of the current working directory.
 pwd
