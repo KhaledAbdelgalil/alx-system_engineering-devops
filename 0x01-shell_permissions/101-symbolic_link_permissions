@@ -1,0 +1,2 @@
+#!/bin/bash
+find . -maxdepth 1 -type l -name "_hello" -exec chown vincent:staff {} +
