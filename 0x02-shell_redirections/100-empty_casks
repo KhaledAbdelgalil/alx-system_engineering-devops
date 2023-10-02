@@ -1,2 +1,2 @@
 #!/bin/bash
-find . -type f -empty -o -type d -empty | cut -c 3-
+find . -empty -exec printf "%s\n" {} + | cut -c 3-
