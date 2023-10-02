@@ -1,2 +1,2 @@
 #!/bin/bash
-find . -type f -name "*.gif" | rev | cut -f1 -d'/' | rev | cut -f1 -d'.' | sort -f | LANG=C sort
+find . -type f -name "*.gif" | rev | cut -f1 -d'/' | rev | cut -f1 -d'.' | sort -f | LC_COLLATE=C sort -f
