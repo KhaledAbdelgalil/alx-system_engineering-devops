@@ -6,15 +6,10 @@ while [ $counter -ne 20 ]
 do
     (( counter++ ))
     echo "$counter"
-    if [ $counter -eq 4 ]
-    then
-	    echo "bad luck from China"
-    elif [ $counter -eq 9 ]
-    then
-	    echo "bad luck from Japan"
-    elif [ $counter -eq 17 ]
-    then
-	    echo "bad luck from Italy"
-    fi
+    case $counter in
+     "4") echo "bad luck from China";;
+     "9") echo "bad luck from Japan";;
+     "17") echo "bad luck from Italy";;
+    esac
 done
 
