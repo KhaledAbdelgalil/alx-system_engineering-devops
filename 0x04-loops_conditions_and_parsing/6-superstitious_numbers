@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# task 6
+
+counter=0
+while [ $counter -ne 20 ]
+do
+    (( counter++ ))
+    echo "$counter"
+    if [ $counter -eq 4 ]
+    then
+	    echo "bad luck from China"
+    elif [ $counter -eq 9 ]
+    then
+	    echo "bad luck from Japan"
+    elif [ $counter -eq 17 ]
+    then
+	    echo "bad luck from Italy"
+    fi
+done
+
