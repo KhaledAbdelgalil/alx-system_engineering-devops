@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# This script searches for processes with 'bash' in their name and outputs their PID and name.
+
+# Traverse each entry in the /proc directory
+for process_dir in /proc/*/
+do
+    # Isolate the PID from the directory name
+    process_id=$(basename "$process_dir")
+
+    # Verify if the entry is a valid process by checking if it's a number
+    if [[ $process_id =~ ^[0-9]+$ ]]
+    then
+        # Obtain the process's command line and look for the 'bash' keyword
+        proc_name=$(tr '\0' ' ' < "$process_dir/cmdline" 2>/dev/null | grep -o '\<bash\>' || true)
+        # Output the PID and process name if it's a bash process
+        if [[ -n $proc_name ]]
+        then
+            echo "$process_id $proc_name"
+        fi
+    fi
+done
