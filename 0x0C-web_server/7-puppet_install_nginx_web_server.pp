@@ -1,28 +1,19 @@
-# install a nginx server
+#install nginx server
 
 package { 'nginx':
-  ensure => 'installed',
+  ensure => installed,
 }
-
 file { '/var/www/html/index.html':
-  ensure  => 'file',
   content => 'Hello World!',
 }
-
-file { '/etc/nginx/sites-available/default':
-  ensure  => 'file',
-  content => template('nginx/default.conf.erb'),
-  require => Package['nginx'],
+file_line { 'default':
+  ensure => 'present',
+  path   => '/etc/nginx/sites-available/default',
+  after  => 'listen 80 default_server;',
+  line   => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
 }
 
 service { 'nginx':
-  ensure  => 'running',
-  enable  => true,
-  require => File['/etc/nginx/sites-available/default'],
-}
-
-firewall { 'allow nginx http':
-  port   => 80,
-  proto  => 'tcp',
-  action => 'accept',
+  ensure  => running,
+  require => Package['nginx'],
 }
