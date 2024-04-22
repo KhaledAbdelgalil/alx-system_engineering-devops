@@ -1,8 +1,28 @@
 # install a nginx server
 
-exec { 'install_nginx':
-  command => '/bin/bash -c "apt-get -y update && apt-get -y install nginx && ufw allow \'Nginx HTTP\' && echo \'Hello World!\' > /var/www/html/index.html && sed -i \'24i\    rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;\' /etc/nginx/sites-available/default && service nginx start"',
-  path    => ['/bin', '/usr/bin'],
-  creates => '/var/www/html/index.html',
+package { 'nginx':
+  ensure => 'installed',
+}
+
+file { '/var/www/html/index.html':
+  ensure  => 'file',
+  content => 'Hello World!',
+}
+
+file { '/etc/nginx/sites-available/default':
+  ensure  => 'file',
+  content => template('nginx/default.conf.erb'),
   require => Package['nginx'],
+}
+
+service { 'nginx':
+  ensure  => 'running',
+  enable  => true,
+  require => File['/etc/nginx/sites-available/default'],
+}
+
+firewall { 'allow nginx http':
+  port   => 80,
+  proto  => 'tcp',
+  action => 'accept',
 }
