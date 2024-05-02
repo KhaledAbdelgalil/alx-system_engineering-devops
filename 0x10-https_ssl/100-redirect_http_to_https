@@ -1,0 +1,13 @@
+global
+    ssl-dh-param-file /etc/haproxy/dhparams.pem
+frontend haproxy_balancer
+    bind *:80
+    bind *:443 ssl crt /etc/haproxy/certs/www.khaledmansour.tech.pem
+    redirect scheme https code 301 if !{ ssl_fc }
+    mode http
+    default_backend webservers
+    
+backend webservers
+    mode http
+    server 530926-web-01 54.237.48.43:80 check
+    server 530926-web-02 35.175.132.199:80 check
