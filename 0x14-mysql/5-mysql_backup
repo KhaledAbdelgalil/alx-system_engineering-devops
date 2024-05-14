@@ -15,7 +15,7 @@ dump_file="backup.sql"
 archive_name="$current_date.tar.gz"
 
 # MySQL dump command
-mysqldump --user=root --password="$1" --all-databases > "$dump_file"
+mysqldump --user=root --all-databases > "$dump_file"
 
 # Create a tar.gz archive
 tar -czf "$archive_name" "$dump_file"
