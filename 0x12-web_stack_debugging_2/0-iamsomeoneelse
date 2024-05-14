@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-sudo su -c whoami "$1"
+sudo usermod --shell /bin/bash "$1"
+su -c whoami "$1"
 
