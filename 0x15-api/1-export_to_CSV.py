@@ -5,14 +5,14 @@ import requests
 import sys
 
 if __name__ == "__main__":
-    userId = sys.argv[1]
-    commonUrl = "https://jsonplaceholder.typicode.com/users/" + userId
-    userData = requests.get(commonUrl).json()
-    userTasks = requests.get(commonUrl + "/todos/").json()
-    userName = userData.get("name")
+    user_id = sys.argv[1]
+    url = "https://jsonplaceholder.typicode.com/"
+    user = requests.get(url + "users/{}".format(user_id)).json()
+    username = user.get("username")
+    todos = requests.get(url + "todos", params={"userId": user_id}).json()
 
-    with open("{}.csv".format(userId), "w", newline="") as csvfile:
+    with open("{}.csv".format(user_id), "w", newline="") as csvfile:
         writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
         [writer.writerow(
-            [userId, userName, t.get("completed"), t.get("title")]
-         ) for t in userTasks]
+            [user_id, username, t.get("completed"), t.get("title")]
+         ) for t in todos]
