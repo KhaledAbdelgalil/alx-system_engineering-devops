@@ -10,7 +10,7 @@ if __name__ == "__main__":
     userData = requests.get(commonUrl).json()
     userTasks = requests.get(commonUrl + "/todos/").json()
     userName = userData["name"]
-    with open(f"{userId}.csv", "w") as csvfile:
+    with open(f"{userId}.csv", "w", newline="") as csvfile:
         writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
         [
             writer.writerow(
