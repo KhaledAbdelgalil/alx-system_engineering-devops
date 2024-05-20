@@ -11,7 +11,7 @@ if __name__ == "__main__":
     userTasks = requests.get(commonUrl + "/todos/").json()
     userName = userData.get("username")
 
-    with open("{}.csv".format(userId), "w", newline="") as csvfile:
+    with open("{}.csv".format(userId), "w") as csvfile:
         writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
         [writer.writerow(
             [userId, userName, t.get("completed"), t.get("title")]
