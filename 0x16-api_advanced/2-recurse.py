@@ -4,10 +4,11 @@ Function returns the titles of  hot
 posts listed for a given subreddit
 """
 import requests
+after = None
 
-
-def recurse(subreddit, hot_list=[], after=None):
+def recurse(subreddit, hot_list=[]):
     """Returns a list of titles of all hot posts on a given subreddit."""
+    global after
     if subreddit is None or type(subreddit) is not str:
         return None
     url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
@@ -25,7 +26,7 @@ def recurse(subreddit, hot_list=[], after=None):
     results = response.json().get("data")
     after = results.get("after")
     if after is not None:
-        recurse(subreddit, hot_list, after)
+        recurse(subreddit, hot_list)
     
     for c in results.get("children"):
         hot_list.append(c.get("data").get("title"))
