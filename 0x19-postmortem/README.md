@@ -1,5 +1,7 @@
 # PharmaCheck Drug Checker App - Outage Postmortem
 
+![alt text]([http://url/to/img.png](https://www.turntrading.com/wp-content/uploads/2017/05/fx-%E5%A4%B1%E6%95%97-6.jpg))
+
 ## Issue Summary
 **Duration**: June 4, 2024, 13:00 - 15:30 UTC (2 hours 30 minutes)
 
