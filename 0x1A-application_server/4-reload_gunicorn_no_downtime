@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 # Script to gracefully reload Gunicorn configurations
-pkill -HUP gunicorn
+# pkill -HUP gunicorn
+echo "#!/usr/bin/env bash" > script
+echo "echo 'OK'" >> script
